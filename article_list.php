@@ -12,7 +12,7 @@
     $sql = "SELECT * from article where user_id= $user_id";
     $result = $conn->query($sql);
     // $data = mysqli_fetch_array($result)
-    // print_r($result); exit;
+    print_r($result); exit;
 
 ?>
 

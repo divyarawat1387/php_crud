@@ -12,12 +12,19 @@
     include 'config.php';
 
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * from users where id= $user_id";
+    $sql = "SELECT users.* from users where users.id= $user_id ";
+    
     $result = $conn->query($sql); 
     $data = mysqli_fetch_assoc($result);
 
-    $arr = $data['hobbies'];
-    $hobby = explode(',',$arr);
+    
+    $query = "SELECT * from hobby where user_id= $user_id ";
+    $result2 = $conn->query($query); 
+    $hobby = array();
+    while ($row = mysqli_fetch_array($result2))
+    {  
+        $hobby[] = $row["hobby"]; 
+    }
     // print_r($hobby); exit;
 ?>
 

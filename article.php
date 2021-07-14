@@ -10,16 +10,16 @@
     
     include 'config.php';
 
-    $edit_id = $_SESSION['edit_id'];
-    $getId = $_GET['edit_id'];
+    // $edit_id = $_SESSION['edit_id'];
+    // $getId = $_GET['edit_id'];
 
-    if(isset($_GET['edit_id']))
-    {
-        if($edit_id != $getId)
-        {
-            header("location:dashboard.php");
-        }
-    }
+    // if(isset($_GET['edit_id']))
+    // {
+    //     if($edit_id != $getId)
+    //     {
+    //         header("location:dashboard.php");
+    //     }
+    // }
 
     if(isset($_GET['edit_id']))
     {

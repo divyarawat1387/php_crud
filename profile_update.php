@@ -17,8 +17,10 @@
             $image      = $_FILES['image_upload']['name'];
             $gender     = $_POST['gender'];
             $use_id     = $_POST['user_id'];
+            $hobbies    = $_POST['hobbies'];
+            $current_date = date('y-m-d h:i:s');
 
-            $hobbies = implode(',',$_POST['hobbies']);
+            // $hobbies = implode(',',$_POST['hobbies']);
             // print_r($hobbies); exit;
 
             if(isset($_FILES["image_upload"]["name"]) && $_FILES["image_upload"]["name"] != null )
@@ -27,14 +29,21 @@
                 $tempname = $_FILES["image_upload"]["tmp_name"];
                 move_uploaded_file($tempname,"user_images/".$filename);
             }
-            // print_r($filename); exit;
 
-            $sql = "UPDATE users SET first_name='".$first_name."' , last_name='".$last_name."' , email='".$email."', mobile_no='".$mobile_no."' , image='".$filename."', gender='".$gender."', hobbies='".$hobbies."' WHERE id='".$use_id."'";
+            $sql = "UPDATE users SET first_name='".$first_name."' , last_name='".$last_name."' , email='".$email."', mobile_no='".$mobile_no."' , image='".$filename."', gender='".$gender."' WHERE id='".$use_id."'";
 
             if ($conn->query($sql) == TRUE)
                 {
+                    $query = "DELETE FROM hobby where user_id = $use_id" ;
+                    mysqli_query($conn, $query);
+                    
+                    foreach($hobbies as $value)
+                    {
+                        $query1 = "INSERT INTO hobby(user_id,hobby,created_at) VALUES ('".$use_id."','".$value."','".$current_date."')";
+                        // print_r($query1); exit;
+                        $conn->query($query1);
+                    }
                 //echo "New record created successfully";
-                $_SESSION['success_message'] = "Contact form saved successfully.";            
                 header("location:dashboard.php");
                 }
             else 
