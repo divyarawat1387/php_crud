@@ -26,7 +26,6 @@
                 // print_r($hobbies); exit;
                 foreach($hobbies as $value)
                 {
-                    // print_r($value); 
                     $query = "INSERT INTO hobby (user_id,hobby,created_at) VALUES ('".$last_id."','".$value."' , '".$current_date."')";
                     $conn->query($query);
                 }
